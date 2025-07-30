@@ -176,7 +176,7 @@ variable "base_scenario" {
 
 variable "scenario" {
   description = "Prerequisites scenario to run at the end of infrastructure provision"
-  default     = "00_test_base"
+  default     = "00_base_scenario_files"
 }
 
 variable "solve_scenario" {
@@ -186,5 +186,5 @@ variable "solve_scenario" {
 
 variable "log_level" {
   description = "Log level for the scenario provisioning script. Allowed values are 0,1,2,3,4"
-  default     = "2"
+  default     = "1"
 }
