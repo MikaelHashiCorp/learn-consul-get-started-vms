@@ -417,7 +417,22 @@ telemetry {
 EOF
 
   _log " - Validate configuration for consul-server-$i"
-  consul validate ./  > /dev/null 2>&1
+  
+  # Check if consul binary is available
+  if command -v consul >/dev/null 2>&1; then
+    # Try to validate the configuration
+    if consul validate ./ 2>/tmp/consul_validate_error_$i.log; then
+      _log "Configuration validation passed for consul-server-$i"
+    else
+      _log_err "Configuration validation failed for consul-server-$i"
+      _log_err "Validation errors:"
+      cat /tmp/consul_validate_error_$i.log
+      exit 1
+    fi
+  else
+    _log_warn "Consul binary not found in PATH. Skipping validation."
+    _log_warn "Configuration files generated but not validated."
+  fi
 
   STAT=$?
 

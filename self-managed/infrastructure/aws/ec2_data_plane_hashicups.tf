@@ -12,7 +12,7 @@ resource "aws_instance" "database" {
   depends_on    = [module.vpc]
   count         = var.hc_db_number
   ami           = data.aws_ami.debian-12.id
-  instance_type = "t2.micro"
+  instance_type = "t3a.medium"
   key_name      = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,
@@ -64,7 +64,7 @@ resource "aws_instance" "api" {
   depends_on    = [module.vpc]
   count         = var.hc_api_number
   ami           = data.aws_ami.debian-12.id
-  instance_type = "t2.micro"
+  instance_type = "t3a.medium"
   key_name      = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,
@@ -116,7 +116,7 @@ resource "aws_instance" "frontend" {
   depends_on    = [module.vpc]
   count         = var.hc_fe_number
   ami           = data.aws_ami.debian-12.id
-  instance_type = "t2.micro"
+  instance_type = "t3a.medium"
   key_name      = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,
@@ -169,7 +169,7 @@ resource "aws_instance" "nginx" {
   count                       = var.hc_lb_number
   ami                         = data.aws_ami.debian-12.id
   associate_public_ip_address = true
-  instance_type               = "t2.micro"
+  instance_type               = "t3a.medium"
   key_name                    = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,

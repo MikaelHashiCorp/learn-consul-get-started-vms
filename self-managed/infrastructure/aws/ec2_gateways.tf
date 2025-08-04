@@ -12,7 +12,7 @@ resource "aws_instance" "gateway-api" {
   depends_on    = [module.vpc]
   count         = var.api_gw_number
   ami           = data.aws_ami.debian-12.id
-  instance_type = "t2.micro"
+  instance_type = "t3a.medium"
   key_name      = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,
@@ -64,7 +64,7 @@ resource "aws_instance" "gateway-mesh" {
   depends_on    = [module.vpc]
   count         = var.mesh_gw_number
   ami           = data.aws_ami.debian-12.id
-  instance_type = "t2.micro"
+  instance_type = "t3a.medium"
   key_name      = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,
@@ -114,7 +114,7 @@ resource "aws_instance" "gateway-terminating" {
   depends_on    = [module.vpc]
   count         = var.term_gw_number
   ami           = data.aws_ami.debian-12.id
-  instance_type = "t2.micro"
+  instance_type = "t3a.medium"
   key_name      = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,
@@ -164,7 +164,7 @@ resource "aws_instance" "consul-esm" {
   depends_on    = [module.vpc]
   count         = var.consul_esm_number
   ami           = data.aws_ami.debian-12.id
-  instance_type = "t2.micro"
+  instance_type = "t3a.medium"
   key_name      = aws_key_pair.keypair.id
   vpc_security_group_ids = [
     aws_security_group.ingress-ssh.id,

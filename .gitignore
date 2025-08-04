@@ -36,3 +36,4 @@ terraform.tfstate*
 *.jq
 *.tfplan
 self-managed/infrastructure/aws/terraform-apply-std.log
+self-managed/infrastructure/aws/terraform-apply.log
